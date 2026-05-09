@@ -811,16 +811,19 @@
 /* ═══════════════════════════════════════════════
    CONFIG — เก็บ API URL ใน localStorage
 ═══════════════════════════════════════════════ */
-const CONFIG_KEY = 'https://script.google.com/macros/s/AKfycbwP6X53FgGdCLRRkZGI4I8n52pJpcVS7ChN6vs2j1ArD7p3SQie9Gn16098B2Vsl0C_/exec';
+// ✅ ถูก — KEY ควรเป็นชื่อธรรมดา, VALUE คือ URL จริง
+const CONFIG_KEY = 'supply_api_url';
 
+// และใส่ค่า default ไปเลย
 function getApiUrl() {
-  return localStorage.getItem(CONFIG_KEY) || '';
+  return localStorage.getItem(CONFIG_KEY) 
+    || 'https://script.google.com/macros/s/AKfycbwP6X53FgGdCLRRkZGI4I8n52pJpcVS7ChN6vs2j1ArD7p3SQie9Gn16098B2Vsl0C_/exec';
 }
 
 function saveApiUrl() {
   const url = document.getElementById('api-url-input').value.trim();
   if (!url) { toast('กรุณาใส่ URL', 'warn'); return; }
-  localStorage.setItem(CONFIG_KEY, url);
+  localStorage.setItem(CONFIG_KEY, url);  // ใช้ CONFIG_KEY ที่แก้แล้ว
   toast('บันทึก URL สำเร็จ ✓');
   document.getElementById('api-config-banner').classList.remove('show');
 }
